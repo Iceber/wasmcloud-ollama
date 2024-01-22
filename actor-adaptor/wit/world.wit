@@ -1,0 +1,11 @@
+package ollama:adaptor;
+
+/// All interfaces provided by the host. This may change in backwards-incompatible way.
+world interfaces {
+    import wasmcloud:bus/host;
+    import wasmcloud:bus/guest-config;
+
+    import wasi:logging/logging;
+
+    export ollama:llm/llm;
+}

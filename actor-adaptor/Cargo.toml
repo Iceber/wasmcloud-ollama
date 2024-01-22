@@ -1,0 +1,14 @@
+[package]
+name = "ollama-actor-adaptor"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+serde = { version = "1.0.193", features = ["derive"] }
+rmp-serde = { version = "1.1.2", default_features = false }
+wit-bindgen = { version = "0.16" }
