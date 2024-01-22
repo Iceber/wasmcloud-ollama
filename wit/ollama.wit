@@ -1,0 +1,78 @@
+package ollama:llm;
+
+interface llm {
+    record message {
+        role: string,
+        content: string
+    }
+
+    record chat-request {
+        model: string,
+        messages: list<message>,
+        with-stream: option<bool>,
+        format: string,
+        options: list<tuple<string, string>>
+    }
+
+    record chat-response {
+        model: string,
+        created-at: u64,
+        message: message,
+        done: bool,
+        total-duration: u64,
+        load-duration: u64,
+        prompt-eval-count: u32,
+        prompt-eval-duration: u32,
+        eval-count: u32,
+        eval-duration: u32
+    }
+
+    record status-error {
+        status-code: u32,
+        status: string,
+        error: string
+    }
+
+    record show-request {
+        name: string,
+        model: string,
+        system: string,
+        template: string,
+        options: list<tuple<string, string>>
+    }
+
+    record show-response {
+        license: string,
+        modelfile: string,
+        parameters: string,
+        template: string,
+        system: string,
+        details: model-details
+    }
+
+    record model-details {
+        format: string,
+        family: string,
+        families: list<string>,
+        parameter-size: string,
+        quantization-level: string
+    }
+
+    record model-response {
+        name: string,
+        modified-at: u64,
+        size: u64,
+        digest: string,
+        details: model-details
+    }
+
+    record list-response {
+        models: list<model-response>
+    }
+
+    chat: func(request: chat-request) -> result<chat-response, status-error>;
+
+    show: func(request: show-request) -> result<show-response, status-error>;
+
+    %list: func() -> result<list-response, status-error>;
+}
