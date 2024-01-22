@@ -1,0 +1,3 @@
+[submodule "provider/ollama"]
+	path = provider/ollama
+	url = https://github.com/jmorganca/ollama.git
