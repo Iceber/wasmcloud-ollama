@@ -1,0 +1,7 @@
+package ollama:openai;
+
+world interfaces {
+    import ollama:llm/llm;
+
+    export wasi:http/incoming-handler@0.2.0-rc-2023-12-05;
+}
