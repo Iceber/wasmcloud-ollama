@@ -12,8 +12,8 @@ all: build-adaptor-component openai-server remote-provider-par
 
 .PHONY: build-adaptor-component
 build-adaptor-component:
-	cd ./actor-adaptor && cargo build --release --target wasm32-wasi
-	wasm-tools component new ./actor-adaptor/target/wasm32-wasi/release/ollama_actor_adaptor.wasm -o ./ollama_wasmcloud_adaptor.wasm --adapt $(WASI_SNAPSHOT_PREVIEW1_ADAPTOR)
+	cd ./ollama-adaptor && cargo build --release --target wasm32-wasi
+	wasm-tools component new ./ollama-adaptor/target/wasm32-wasi/release/wasmcloud_ollama_adaptor.wasm -o ./wasmcloud_ollama_adaptor.wasm --adapt $(WASI_SNAPSHOT_PREVIEW1_ADAPTOR)
 
 .PHONY: build-openai-server-component
 build-openai-server-component:
@@ -24,7 +24,7 @@ build-openai-server-component:
 
 .PHONY: openai-server
 openai-server: build-adaptor-component build-openai-server-component
-	wasm-tools compose -o ollama_openai_server.wasm -d ./ollama_wasmcloud_adaptor.wasm ./build/openai_server.wasm
+	wasm-tools compose -o ollama_openai_server.wasm -d ./wasmcloud_ollama_adaptor.wasm ./build/openai_server.wasm
 	wash claims sign -q -l -c $(CONTRACT_ID) -n "ollama-openai-server" -r 1 -v 0.1.0 ./ollama_openai_server.wasm
 
 .PHONY: build-remote-provider

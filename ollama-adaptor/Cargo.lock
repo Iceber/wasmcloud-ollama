@@ -92,15 +92,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ollama-actor-adaptor"
-version = "0.1.0"
-dependencies = [
- "rmp-serde",
- "serde",
- "wit-bindgen",
-]
-
-[[package]]
 name = "paste"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -265,6 +256,15 @@ dependencies = [
  "spdx",
  "wasm-encoder 0.39.0",
  "wasmparser 0.119.0",
+]
+
+[[package]]
+name = "wasmcloud-ollama-adaptor"
+version = "0.1.0"
+dependencies = [
+ "rmp-serde",
+ "serde",
+ "wit-bindgen",
 ]
 
 [[package]]
