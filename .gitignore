@@ -4,4 +4,4 @@
 target/
 *.par
 *.wasm
-!/wasi_snapshot_preview1.proxy.wasm
+!/hack/wasi_snapshot_preview1.proxy.wasm
