@@ -57,8 +57,8 @@ fn handle_list_models() -> (u16, Vec<(String, String)>, Vec<u8>) {
                 .map(|m| openai_api::models::Model {
                     id: m.name.clone(),
                     created: time::Duration::from_millis(m.modified_at).as_secs(),
-                    object: String::from("model"),
-                    owned_by: String::from("Not specified"),
+                    object: "model".to_string(),
+                    owned_by: "Not specified".to_string(),
                 })
                 .collect();
             let response = openai_api::models::ListModelsResponse {

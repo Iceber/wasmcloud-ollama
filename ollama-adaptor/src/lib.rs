@@ -34,7 +34,7 @@ impl llm::Guest for OllamaLlm {
                 return Err(llm::StatusError {
                     error: err.to_string(),
                     status_code: 0,
-                    status: String::from("PreWasmCloudCall"),
+                    status: "PreWasmCloudCall".to_string(),
                 })
             }
         };
@@ -42,7 +42,7 @@ impl llm::Guest for OllamaLlm {
             Err(err) => Err(llm::StatusError {
                 error: err.to_string(),
                 status_code: 0,
-                status: String::from("FailedWasmCloudCall"),
+                status: "FailedWasmCloudCall".to_string(),
             }),
             Ok(result) => {
                 match rmp_serde::from_slice::<Result<ChatResponse, StatusError>>(&result) {
@@ -70,7 +70,7 @@ impl llm::Guest for OllamaLlm {
                     },
                     Err(error) => Err(llm::StatusError {
                         error: error.to_string(),
-                        status: String::from("InvalidWasmCloudCallResponse"),
+                        status: "InvalidWasmCloudCallResponse".to_string(),
                         status_code: 0,
                     }),
                 }
@@ -93,7 +93,7 @@ impl llm::Guest for OllamaLlm {
                 return Err(llm::StatusError {
                     error: err.to_string(),
                     status_code: 0,
-                    status: String::from("PreWasmCloudCall"),
+                    status: "PreWasmCloudCall".to_string(),
                 })
             }
         };
@@ -101,7 +101,7 @@ impl llm::Guest for OllamaLlm {
             Err(err) => Err(llm::StatusError {
                 error: err.to_string(),
                 status_code: 0,
-                status: String::from("FailedWasmCloudCall"),
+                status: "FailedWasmCloudCall".to_string(),
             }),
             Ok(result) => {
                 match rmp_serde::from_slice::<Result<ShowResponse, StatusError>>(&result) {
@@ -128,7 +128,7 @@ impl llm::Guest for OllamaLlm {
                     },
                     Err(error) => Err(llm::StatusError {
                         error: error.to_string(),
-                        status: String::from("InvalidWasmCloudCallResponse"),
+                        status: "InvalidWasmCloudCallResponse".to_string(),
                         status_code: 0,
                     }),
                 }
@@ -141,7 +141,7 @@ impl llm::Guest for OllamaLlm {
             Err(err) => Err(llm::StatusError {
                 error: err.to_string(),
                 status_code: 0,
-                status: String::from("FailedWasmCloudCall"),
+                status: "FailedWasmCloudCall".to_string(),
             }),
             Ok(result) => {
                 match rmp_serde::from_slice::<Result<ListResponse, StatusError>>(&result) {
@@ -173,7 +173,7 @@ impl llm::Guest for OllamaLlm {
                     },
                     Err(error) => Err(llm::StatusError {
                         error: error.to_string(),
-                        status: String::from("InvalidWasmCloudCallResponse"),
+                        status: "InvalidWasmCloudCallResponse".to_string(),
                         status_code: 0,
                     }),
                 }
