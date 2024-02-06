@@ -22,7 +22,8 @@ type OllamaAdaptor interface {
 type ollamaProvider struct {
 	ollama OllamaAdaptor
 
-	Logger logr.Logger
+	provider provider.WasmcloudProvider
+	Logger   logr.Logger
 }
 
 func New(adaptor OllamaAdaptor) (*provider.WasmcloudProvider, error) {
@@ -39,6 +40,10 @@ func New(adaptor OllamaAdaptor) (*provider.WasmcloudProvider, error) {
 	}
 	p.Logger = provider.Logger
 	return provider, nil
+}
+
+func (h *ollamaProvider) HostData() core.HostData {
+	return h.provider.HostData()
 }
 
 func (h *ollamaProvider) HandleAction(action provider.ProviderAction) (*provider.ProviderResponse, error) {
@@ -68,8 +73,10 @@ func (h *ollamaProvider) HandleAction(action provider.ProviderAction) (*provider
 		err = fmt.Errorf("Invalid method name: %s", action.Operation)
 	}
 
-	response := &provider.ProviderResponse{Error: err.Error()}
-	if err == nil {
+	response := &provider.ProviderResponse{}
+	if err != nil {
+		response.Error = err.Error()
+	} else {
 		if response.Msg, err = msgpack.Marshal(actionResp); err != nil {
 			response.Error = err.Error()
 		}
@@ -176,7 +183,7 @@ func (h *ollamaProvider) handleListRequest(ctx context.Context) ProviderActionRe
 }
 
 func checkResponseError(err error) *StatusError {
-	if err != nil {
+	if err == nil {
 		return nil
 	}
 
