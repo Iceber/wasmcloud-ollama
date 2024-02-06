@@ -62,7 +62,7 @@ remote-provider-multi-platform-par:
 
 .PHONY: standalone-provider-par
 standalone-provider-par: build-standalone-provider
-	wash par create --name $(STANDALONE_PROVIDER_NAME) --arch aarch64-macos --capid $(CONTRACT_ID) --binary ./provider/standalone-provider --vendor $(VENDOR) --destination=standalone-provider.par
+	wash par create --name $(STANDALONE_PROVIDER_NAME) --arch aarch64-macos --capid $(CONTRACT_ID) --binary ./build/standalone-provider --vendor $(VENDOR) --destination=standalone-provider.par
 
 .PHONY: clean
 clean:
