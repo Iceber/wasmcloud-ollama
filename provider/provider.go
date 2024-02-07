@@ -162,8 +162,15 @@ func (h *ollamaProvider) handleListRequest(ctx context.Context) ProviderActionRe
 		return ProviderActionResponse{Err: statusErr}
 	}
 
-	var aresponse ListResponse
+	aresponse := ListResponse{
+		Models: make([]ModelResponse, 0),
+	}
 	for _, model := range oresponse.Models {
+		// TODO(Iceber): Modify families field in ollama.wit to Opional
+		families := make([]string, 0)
+		if model.Details.Families != nil {
+			families = model.Details.Families
+		}
 		aresponse.Models = append(aresponse.Models, ModelResponse{
 			Name:       model.Name,
 			ModifiedAt: uint64(model.ModifiedAt.UnixMilli()),
@@ -172,7 +179,7 @@ func (h *ollamaProvider) handleListRequest(ctx context.Context) ProviderActionRe
 			Details: ModelDetails{
 				Format:            model.Details.Format,
 				Family:            model.Details.Family,
-				Families:          model.Details.Families,
+				Families:          families,
 				ParameterSize:     model.Details.ParameterSize,
 				QuantizationLevel: model.Details.QuantizationLevel,
 			},
